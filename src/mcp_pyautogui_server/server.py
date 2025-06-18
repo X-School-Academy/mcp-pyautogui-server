@@ -137,19 +137,29 @@ def screenshot() -> Image | Dict[str, str]:
 
 @mcp.tool()
 def scroll_up() -> Dict[str, str]:
-    """Scroll up."""
+    """Scroll content upward."""
     try:
         pyautogui.scroll(-10)
-        return {"status": "success", "message": "Scrolled up"}
+        return {"status": "success", "message": "Scrolled content up"}
     except Exception as e:
-        return {"status": "error", "message": f"Failed to scroll up: {str(e)}"}
+        return {"status": "error", "message": f"Failed to scroll content up: {str(e)}"}
 
 
 @mcp.tool()
 def scroll_down() -> Dict[str, str]:
-    """Scroll down."""
+    """Scroll content downward."""
     try:
         pyautogui.scroll(10)
-        return {"status": "success", "message": "Scrolled down"}
+        return {"status": "success", "message": "Scrolled content down"}
     except Exception as e:
-        return {"status": "error", "message": f"Failed to scroll down: {str(e)}"}
+        return {"status": "error", "message": f"Failed to scroll content down: {str(e)}"}
+    
+@mcp.tool()
+def scroll(clicks: int) -> Dict[str, str]:
+    """Scroll content upward or downward by clicks (positive downward and negative upward)."""
+    try:
+        direction = "down" if clicks > 0 else "up"
+        pyautogui.scroll(clicks)
+        return {"status": "success", "message": f"Scrolled content {direction}"}
+    except Exception as e:
+        return {"status": "error", "message": f"Failed to scroll content {direction}: {str(e)}"}
